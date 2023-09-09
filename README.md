@@ -25,7 +25,7 @@ SyncTube is a real-time synchronized video streaming and chat application that a
 1. Clone this repository.
 2. Install dependencies: `npm install`.
 3. Start the development server: `npm run dev`.
-First, run the development server:
+   First, run the development server:
 
 ```bash
 npm run dev
