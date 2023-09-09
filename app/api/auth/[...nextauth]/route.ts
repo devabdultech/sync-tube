@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaClient } from "@prisma/client";
+import { generateRandomString } from "@/utils/random";
 
 const prisma = new PrismaClient();
 
@@ -26,10 +27,13 @@ const handler = NextAuth({
 			});
 
 			if (!existingUser) {
+				const randomSuffix = generateRandomString();
+				const firstName = user.name?.split(" ")[0];
 				await prisma.user.create({
 					data: {
 						email: user.email!,
-						name: user.name!
+						name: user.name!,
+						username: `${firstName}#${randomSuffix}`
 					}
 				});
 			}
