@@ -28,12 +28,13 @@ const handler = NextAuth({
 
 			if (!existingUser) {
 				const randomSuffix = generateRandomString();
-				const firstName = user.name?.split(" ")[0];
+				const firstName = user.name?.split(" ")[0].toLocaleLowerCase();
 				await prisma.user.create({
 					data: {
 						email: user.email!,
 						name: user.name!,
-						username: `${firstName}#${randomSuffix}`
+						username: `${firstName}#${randomSuffix}`,
+						image: user.image || profile?.image || null
 					}
 				});
 			}
