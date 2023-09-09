@@ -1,5 +1,8 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 const handler = NextAuth({
 	providers: [
@@ -15,7 +18,26 @@ const handler = NextAuth({
 			}
 		})
 	],
-	secret: process.env.JWT_SECRET!
+	secret: process.env.JWT_SECRET!,
+	callbacks: {
+		async signIn({ user, profile }) {
+			const existingUser = await prisma.user.findUnique({
+				where: { email: user.email! }
+			});
+
+			if (!existingUser) {
+				await prisma.user.create({
+					data: {
+						email: user.email!,
+						name: user.name!,
+						image: user.image! || profile?.image! || null
+					}
+				});
+			}
+
+			return true;
+		}
+	}
 });
 
 export { handler as GET, handler as POST };
