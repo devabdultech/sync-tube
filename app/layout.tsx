@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Sync Tube",
+	title: "Sync Tube - Watching Together, No Matter The Distance",
 	description: "Real-Time Synchronized Video Streaming and Chat Application"
 };
 
