@@ -14,7 +14,7 @@ const Footer = () => {
 		}
 	];
 	return (
-		<footer className="mt-5 flex flex-col items-start justify-between gap-2 border-t p-5 lg:flex-row lg:items-center lg:gap-0">
+		<footer className="flex flex-col items-start justify-between gap-2 border-t p-5 lg:flex-row lg:items-center lg:gap-0">
 			<Link href="/">
 				<div className="flex items-center gap-2 font-semibold lg:text-lg">
 					<MonitorPlayIcon /> <h3>SyncTube</h3>

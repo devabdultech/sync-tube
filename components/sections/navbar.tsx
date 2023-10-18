@@ -30,7 +30,9 @@ const Navbar = () => {
 				</SheetTrigger>
 				<SheetContent>
 					<div className="mt-8 flex flex-col gap-4">
-						<Button className="w-full">Login</Button>
+						<Button className="w-full">
+							<Link href="/login">Login</Link>
+						</Button>
 
 						<div className="flex w-full items-center justify-between">
 							<Button onClick={() => setTheme("light")}>Light</Button>
@@ -42,7 +44,9 @@ const Navbar = () => {
 			</Sheet>
 
 			<div className="hidden items-center gap-3 lg:flex">
-				<Button className="">Login</Button>
+				<Button className="">
+					<Link href="/login">Login</Link>
+				</Button>
 
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 const Hero = () => {
@@ -13,7 +14,9 @@ const Hero = () => {
 			</p>
 
 			<div className="mt-6">
-				<Button className="mr-4">Start watching</Button>
+				<Button className="mr-4">
+					<Link href="/login">Start watching</Link>
+				</Button>
 				<Button variant="outline">Learn More</Button>
 			</div>
 		</section>
