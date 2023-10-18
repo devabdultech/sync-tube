@@ -6,7 +6,7 @@ module.exports = {
 		"./pages/**/*.{ts,tsx}",
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
-		"./src/**/*.{ts,tsx}",
+		"./src/**/*.{ts,tsx}"
 	],
 	theme: {
 		container: {
@@ -65,11 +65,20 @@ module.exports = {
 				"accordion-up": {
 					from: { height: "var(--radix-accordion-content-height)" },
 					to: { height: 0 }
+				},
+				"border-animation": {
+					"0%": {
+						border: "2px solid transparent"
+					},
+					"100%": {
+						border: "2px solid var(--secondary)"
+					}
 				}
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
-				"accordion-up": "accordion-up 0.2s ease-out"
+				"accordion-up": "accordion-up 0.2s ease-out",
+				"border-animation": "border-animation 2s ease"
 			}
 		}
 	},
