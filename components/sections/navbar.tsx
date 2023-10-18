@@ -17,7 +17,7 @@ const Navbar = () => {
 	const { setTheme } = useTheme();
 
 	return (
-		<header className="flex w-full items-center justify-between px-5 py-3">
+		<header className="flex w-full items-center justify-between p-5">
 			<Link href="/">
 				<div className="flex items-center gap-2 font-semibold lg:text-xl">
 					<MonitorPlayIcon /> SyncTube
