@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		domains: ["cdn.simpleicons.org"],
+		remotePatterns: [
+			{ protocol: "https", hostname: "cdn.simpleicons.org" },
+			{ protocol: "https", hostname: "illustrations.popsy.co" }
+		],
 		dangerouslyAllowSVG: true
 	}
 };

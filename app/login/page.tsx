@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChevronLeftIcon, MonitorPlayIcon } from "lucide-react";
 import UserAuthForm from "@/components/sections/user-auth-form";
@@ -33,8 +34,10 @@ const LoginPage = () => {
 					<UserAuthForm />
 				</div>
 			</section>
-			<section className="hidden min-h-screen p-10 lg:block lg:flex-1">
-				I am on the side also
+			<section className="hidden relative min-h-screen p-10 lg:block lg:flex-1">
+				<div className="flex items-center justify-center h-full">
+					<Image src="https://illustrations.popsy.co/amber/man-on-laptop-youtube.svg" fill={true} alt="illustration" />
+				</div>
 			</section>
 		</div>
 	);
