@@ -1,6 +1,10 @@
 import "../styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/providers/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
+import Footer from "@/components/sections/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,7 +16,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>{children}</body>
+			<body className={cn("min-h-[100dvh] bg-background text-primary", inter.className)}>
+				<ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
+					{children}
+					<Footer />
+					<Toaster />
+				</ThemeProvider>
+			</body>
 		</html>
 	);
 }
