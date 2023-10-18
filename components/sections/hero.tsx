@@ -8,7 +8,7 @@ const Hero = () => {
 			</h1>
 
 			<p className="mt-4 text-lg">
-				Sync-Tube is your ultimate platform for synchronized video streaming and chat with friends.
+				SyncTube is your ultimate platform for synchronized video streaming and chat with friends.
 				Share the excitement in real-time.
 			</p>
 
