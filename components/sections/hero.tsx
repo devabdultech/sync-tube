@@ -4,7 +4,7 @@ const Hero = () => {
 	return (
 		<section className="flex flex-col items-center justify-center px-5 py-20 text-center">
 			<h1 className="text-xl font-semibold lg:text-2xl">
-				Sync-Tube: Watching Together, No Matter the Distance
+				SyncTube: Watching Together, No Matter the Distance
 			</h1>
 
 			<p className="mt-4 text-base">
