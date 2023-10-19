@@ -2,11 +2,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 import { ChevronLeftIcon, MonitorPlayIcon } from "lucide-react";
 import UserAuthForm from "@/components/sections/user-auth-form";
 
 const LoginPage = () => {
 	const router = useRouter();
+	const { theme } = useTheme();
 
 	return (
 		<div className="flex w-full flex-col lg:flex-row">
@@ -34,9 +36,17 @@ const LoginPage = () => {
 					<UserAuthForm />
 				</div>
 			</section>
-			<section className="hidden relative min-h-screen p-10 lg:block lg:flex-1">
-				<div className="flex items-center justify-center h-full">
-					<Image src="https://illustrations.popsy.co/amber/man-on-laptop-youtube.svg" fill={true} alt="illustration" />
+			<section className="relative hidden min-h-screen p-10 lg:block lg:flex-1">
+				<div className="flex h-full items-center justify-center">
+					<Image
+						src={
+							theme === "dark"
+								? "https://illustrations.popsy.co/white/man-on-laptop-youtube.svg"
+								: "https://illustrations.popsy.co/amber/man-on-laptop-youtube.svg"
+						}
+						fill={true}
+						alt="illustration"
+					/>
 				</div>
 			</section>
 		</div>
