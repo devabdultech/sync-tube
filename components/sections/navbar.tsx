@@ -30,7 +30,7 @@ const Navbar = () => {
 				</SheetTrigger>
 				<SheetContent>
 					<div className="mt-8 flex flex-col gap-4">
-						<Link className="w-full" href="/login">
+						<Link href="/login">
 							<Button>Login</Button>
 						</Link>
 
@@ -44,7 +44,7 @@ const Navbar = () => {
 			</Sheet>
 
 			<div className="hidden items-center gap-3 lg:flex">
-				<Link className="w-full" href="/login">
+				<Link href="/login">
 					<Button>Login</Button>
 				</Link>
 

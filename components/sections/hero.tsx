@@ -14,9 +14,10 @@ const Hero = () => {
 			</p>
 
 			<div className="mt-6">
-				<Button className="mr-4">
-					<Link href="/login">Start watching</Link>
-				</Button>
+				<Link className="mr-4" href="/login">
+					<Button>Start watching</Button>
+				</Link>
+
 				<Button variant="outline">Learn More</Button>
 			</div>
 		</section>
