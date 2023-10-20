@@ -64,14 +64,12 @@ const UserAuthForm = () => {
 			toast({
 				title: "Check your email",
 				description:
-					"We have sent you a login link. Please check your email (including spam folder) to complete the sign in process.",
-				duration: 5000
+					"We have sent you a login link. Please check your email (including spam folder) to complete the sign in process."
 			});
 		} catch (error: any) {
 			toast({
 				title: "Sign in failed",
 				description: error.message,
-				duration: 5000,
 				variant: "destructive"
 			});
 		}
