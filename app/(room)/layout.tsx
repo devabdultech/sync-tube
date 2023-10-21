@@ -9,6 +9,7 @@ export default async function RoomLayout({ children }: { children: React.ReactNo
 	const supabase = createServerComponentClient({
 		cookies
 	});
+	
 	const {
 		data: { session }
 	} = await supabase.auth.getSession();
