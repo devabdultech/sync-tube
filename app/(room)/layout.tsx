@@ -1,17 +1,21 @@
-"use client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import {
+	createServerComponentClient
+} from "@supabase/auth-helpers-nextjs";
 
-export default function RoomLayout({ children }: { children: React.ReactNode }) {
-	const supabase = createClientComponentClient();
-	const session = supabase.auth.getSession();
-	const router = useRouter();
 
-	useEffect(() => {
-		if (!session) {
-			router.replace("/");
-		}
-	}, [supabase.auth, router, session]);
+export default async function RoomLayout({ children }: { children: React.ReactNode }) {
+	const supabase = createServerComponentClient({
+		cookies
+	});
+	const {
+		data: { session }
+	} = await supabase.auth.getSession();
+
+	if (!session) {
+		redirect("/login");
+	}
+
 	return <>{children}</>;
 }
