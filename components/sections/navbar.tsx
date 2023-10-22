@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { MonitorPlayIcon, MenuIcon, Moon, Sun } from "lucide-react";
@@ -14,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
+	const supabase = createClientComponentClient();
 	const { setTheme } = useTheme();
 
 	return (

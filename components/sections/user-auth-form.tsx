@@ -33,10 +33,7 @@ const UserAuthForm = () => {
 
 	const handleSignInWithEmail = async (email: string) => {
 		const options = {
-			emailRedirectTo:
-				process.env.NODE_ENV === "development"
-					? "http://localhost:3000/app"
-					: "https://sync-tube.vercel.app/app"
+			emailRedirectTo: `${location.origin}/app`
 		};
 		await supabase.auth.signInWithOtp({ email, ...options });
 	};
@@ -49,10 +46,7 @@ const UserAuthForm = () => {
 					access_type: "offline",
 					prompt: "consent"
 				},
-				redirectTo:
-					process.env.NODE_ENV === "development"
-						? "http://localhost:3000/app"
-						: "https://sync-tube.vercel.app/app"
+				redirectTo: `${location.origin}/app`
 			}
 		});
 	};
