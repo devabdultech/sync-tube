@@ -1,3 +1,7 @@
-export default async function RoomLayout({ children }: { children: React.ReactNode }) {	
-	return <>{children}</>;
-}
+interface RoomLayoutProps {
+	children: React.ReactNode
+  }
+
+  export default function RoomLayout({ children }: RoomLayoutProps) {
+	return <>{children}</>
+  }
