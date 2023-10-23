@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { getSession } from "@/lib/session";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { MonitorPlayIcon, MenuIcon, Moon, Sun } from "lucide-react";
@@ -15,8 +15,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
-	const supabase = createClientComponentClient();
 	const { setTheme } = useTheme();
+	const [session, setSession] = useState(null);
+
+	const fetchSession = async () => {
+		const session = await getSession();
+		setSession(session);
+	};
+
+	useEffect(() => {
+		fetchSession();
+	}, []);
 
 	return (
 		<header className="flex w-full items-center justify-between p-5">
@@ -46,9 +55,15 @@ const Navbar = () => {
 			</Sheet>
 
 			<div className="hidden items-center gap-3 lg:flex">
-				<Link href="/login">
-					<Button>Login</Button>
-				</Link>
+				{session ? (
+					<Link href="/app">
+						<Button>App</Button>
+					</Link>
+				) : (
+					<Link href="/login">
+						<Button>Login</Button>
+					</Link>
+				)}
 
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
