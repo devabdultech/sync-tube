@@ -26,14 +26,6 @@ const App = () => {
 		<div>
 			<h3>App</h3>
 			<p>Welcome {userData && userData.email}</p>
-			<Button
-				onClick={async () => {
-					await supabase.auth.signOut();
-					router.push("/");
-				}}
-			>
-				Sign Out
-			</Button>
 		</div>
 	);
 };

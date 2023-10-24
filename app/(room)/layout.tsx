@@ -1,7 +1,14 @@
-interface RoomLayoutProps {
-	children: React.ReactNode
-  }
+import RoomNavbar from "@/components/sections/room-navbar";
 
-  export default function RoomLayout({ children }: RoomLayoutProps) {
-	return <>{children}</>
-  }
+interface RoomLayoutProps {
+	children: React.ReactNode;
+}
+
+export default function RoomLayout({ children }: RoomLayoutProps) {
+	return (
+		<>
+			<RoomNavbar />
+			{children}
+		</>
+	);
+}

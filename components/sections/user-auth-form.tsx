@@ -32,10 +32,12 @@ const UserAuthForm = () => {
 	});
 
 	const handleSignInWithEmail = async (email: string) => {
-		const options = {
-			emailRedirectTo: `${location.origin}/app`
-		};
-		await supabase.auth.signInWithOtp({ email, ...options });
+		await supabase.auth.signInWithOtp({
+			email,
+			options: {
+				emailRedirectTo: `${location.origin}/app`
+			}
+		});
 	};
 
 	const handleSignInWithGoogle = async () => {
