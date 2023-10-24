@@ -16,12 +16,12 @@ import {
 	DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 
-import { MonitorPlayIcon, User2Icon, LogOutIcon, BrushIcon, Moon, Sun, Laptop2Icon } from "lucide-react";
+import { MonitorPlayIcon, User2Icon, LogOutIcon, BrushIcon, Moon, Sun } from "lucide-react";
 
 const RoomNavbar = () => {
 	const supabase = createClientComponentClient();
 	const router = useRouter();
-	const { setTheme } = useTheme();
+	const { setTheme, theme } = useTheme();
 	const [userData, setUserData] = useState<null | User>(null);
 
 	useEffect(() => {
@@ -36,7 +36,7 @@ const RoomNavbar = () => {
 	}, [supabase.auth]);
 
 	return (
-		<header className="flex w-full items-center justify-between p-5">
+		<header className="flex w-full items-center justify-between border-b px-5 py-2 shadow-md">
 			<Link href="/">
 				<div className="flex items-center gap-2 font-semibold lg:text-xl">
 					<MonitorPlayIcon /> SyncTube
@@ -67,11 +67,12 @@ const RoomNavbar = () => {
 						<div className="flex items-center gap-2">
 							<BrushIcon /> Theme
 						</div>
-                        <div className="flex justify-between items-center gap-2">
-                            <Sun className="cursor-pointer" onClick={() => setTheme("light")} />
-                            <Moon className="cursor-pointer" onClick={() => setTheme("dark")} />
-                            <Laptop2Icon className="cursor-pointer" onClick={() => setTheme("system")} />
-                        </div>
+
+						{theme === "light" ? (
+							<Moon className="cursor-pointer" onClick={() => setTheme("dark")} />
+						) : (
+							<Sun className="cursor-pointer" onClick={() => setTheme("light")} />
+						)}
 					</DropdownMenuItem>
 					<DropdownMenuSeparator />
 					<DropdownMenuItem

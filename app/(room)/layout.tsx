@@ -6,9 +6,9 @@ interface RoomLayoutProps {
 
 export default function RoomLayout({ children }: RoomLayoutProps) {
 	return (
-		<>
+		<main className="min-h-[100dvh]">
 			<RoomNavbar />
 			{children}
-		</>
+		</main>
 	);
 }
