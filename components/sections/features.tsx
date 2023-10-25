@@ -49,7 +49,7 @@ const Features = () => {
 			title: "Customizable User Profiles",
 			icon: <ScanFaceIcon size={32} />,
 			description: "Customize your profile with a profile picture and username",
-			toastMessage: "👤 Mateen updated his profile picture. Time for your own picture!"
+			toastMessage: "👧 Rajwah updated her profile picture. Time for your own picture!"
 		},
 		{
 			title: "Secure and Private Rooms",
@@ -57,7 +57,7 @@ const Features = () => {
 			description:
 				"Create private rooms with password protection, ensuring that only invited guests can join",
 			toastMessage:
-				"🔒 Rajwah created a private room. Get the passcode to join the exclusive screening!"
+				"🔒 Mateen created a private room. Get the passcode to join the exclusive screening!"
 		}
 	];
 
