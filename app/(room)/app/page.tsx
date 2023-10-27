@@ -40,7 +40,7 @@ const App = () => {
 		<div className="p-5">
 			<p>Welcome {userData && userData.email}</p>
 
-			<div className="flex items-center justify-between mt-8">
+			<div className="mt-8 flex items-center justify-between">
 				<h3 className="text-lg font-semibold">Rooms</h3>
 
 				<Dialog>
@@ -68,7 +68,7 @@ const App = () => {
 				</Dialog>
 			</div>
 
-			<div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
+			<div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
 				<CreateRoom />
 				<Room />
 				<Room />
