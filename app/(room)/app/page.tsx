@@ -19,26 +19,41 @@ import {
 } from "@/components/ui/dialog";
 import CreateRoom from "@/components/sections/create-room";
 import Room from "@/components/sections/room";
+import GetUsername from "@/components/sections/get-username";
 
 const App = () => {
 	const supabase = createClientComponentClient();
 	const router = useRouter();
 	const [userData, setUserData] = useState<null | User>(null);
+	const [username, setUsername] = useState<string | null>(null);
+	const [openDialog, setOpenDialog] = useState(false);
 
 	useEffect(() => {
 		const fetchUserData = async () => {
 			const {
 				data: { user }
 			} = await supabase.auth.getUser();
+
+			const getUserData = await supabase
+				.from("Users")
+				.select("username, id")
+				.eq("email", user?.email);
+
+			if (getUserData.data?.length === 0) {
+				setOpenDialog(true);
+			}
+
+			const fetchedUsername = getUserData.data?.[0]?.username;
+			setUsername(fetchedUsername);
 			setUserData(user);
 		};
 
 		fetchUserData();
-	}, [supabase.auth]);
+	}, [supabase, supabase.auth]);
 
 	return (
 		<div className="p-5">
-			<p>Welcome {userData && userData.email}</p>
+			<p>Welcome {username}</p>
 
 			<div className="mt-8 flex items-center justify-between">
 				<h3 className="text-lg font-semibold">Rooms</h3>
@@ -69,11 +84,16 @@ const App = () => {
 			<div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
 				<CreateRoom />
 				<Room />
-				<Room />
-				<Room />
-				<Room />
-				<Room />
 			</div>
+
+			<GetUsername
+				dOpen={openDialog}
+				userId={userData?.id}
+				userEmail={userData?.email}
+				onClose={() => {
+					setOpenDialog(false);
+				}}
+			/>
 		</div>
 	);
 };

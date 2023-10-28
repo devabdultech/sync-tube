@@ -22,6 +22,7 @@ const RoomNavbar = () => {
 	const supabase = createClientComponentClient();
 	const router = useRouter();
 	const { setTheme, theme } = useTheme();
+	const [username, setUsername] = useState<string | null>(null);
 	const [userData, setUserData] = useState<null | User>(null);
 
 	useEffect(() => {
@@ -29,11 +30,19 @@ const RoomNavbar = () => {
 			const {
 				data: { user }
 			} = await supabase.auth.getUser();
+
+			const getUserData = await supabase
+				.from("Users")
+				.select("username, id")
+				.eq("email", user?.email);
+
+			const fetchedUsername = getUserData.data?.[0]?.username;
+			setUsername(fetchedUsername);
 			setUserData(user);
 		};
 
 		fetchUserData();
-	}, [supabase.auth]);
+	}, [supabase.auth, supabase]);
 
 	return (
 		<header className="flex w-full items-center justify-between border-b px-5 py-2 shadow-md">
@@ -53,7 +62,7 @@ const RoomNavbar = () => {
 				<DropdownMenuContent>
 					<DropdownMenuLabel className="cursor-pointer">
 						<Link href="/app/profile">
-							<p className="text-base">Abdulhameed</p>
+							<p className="text-base">{username}</p>
 							<p className="mt-1 text-muted-foreground">{userData && userData.email}</p>
 						</Link>
 					</DropdownMenuLabel>
