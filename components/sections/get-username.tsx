@@ -50,13 +50,20 @@ const GetUsername = ({
 	});
 
 	const submitUsername = async (username: string) => {
-		const { data, error } = await supabase.from("Users").upsert([
-			{
-				id: userId,
-				email: userEmail,
-				username
-			}
-		]);
+		const { data, error } = await supabase.from("Users").select("id").eq("username", username);
+		if (data && data.length > 0) {
+			throw new Error(
+				"Username not available, This username is already taken. Please try another one."
+			);
+		} else {
+			await supabase.from("Users").upsert([
+				{
+					id: userId,
+					email: userEmail,
+					username
+				}
+			]);
+		}
 	};
 
 	const onSubmit = async (data: z.infer<typeof FormSchema>) => {
