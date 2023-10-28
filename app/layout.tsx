@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GeistSans } from "geist/font";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body className={cn("min-h-[100dvh] bg-background text-primary", inter.className)}>
+			<body className={cn("min-h-[100dvh] bg-background text-primary", GeistSans.variable)}>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
 					{children}
 					<Footer />
