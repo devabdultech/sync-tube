@@ -11,14 +11,13 @@ import {
 	DialogDescription,
 	DialogHeader,
 	DialogTitle,
-	DialogTrigger,
 	DialogFooter
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import { Loader2Icon, Router } from "lucide-react";
+import { Loader2Icon } from "lucide-react";
 
 const FormSchema = z.object({
 	username: z
@@ -70,7 +69,8 @@ const GetUsername = ({
 			});
 
 			onClose();
-			router.refresh();
+
+			window.location.reload();
 		} catch (error: any) {
 			toast({
 				title: "Username not set",

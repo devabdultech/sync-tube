@@ -1,10 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { User } from "@supabase/auth-helpers-nextjs";
 import { PlusCircleIcon } from "lucide-react";
+import Loading from "@/components/sections/loading";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -23,10 +23,10 @@ import GetUsername from "@/components/sections/get-username";
 
 const App = () => {
 	const supabase = createClientComponentClient();
-	const router = useRouter();
 	const [userData, setUserData] = useState<null | User>(null);
 	const [username, setUsername] = useState<string | null>(null);
 	const [openDialog, setOpenDialog] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchUserData = async () => {
@@ -46,10 +46,15 @@ const App = () => {
 			const fetchedUsername = getUserData.data?.[0]?.username;
 			setUsername(fetchedUsername);
 			setUserData(user);
+			setLoading(false);
 		};
 
 		fetchUserData();
 	}, [supabase, supabase.auth]);
+
+	if (loading) {
+		return <Loading />;
+	}
 
 	return (
 		<div className="p-5">
