@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -42,7 +41,6 @@ const GetUsername = ({
 	userEmail: string | undefined;
 	onClose: () => void;
 }) => {
-	const router = useRouter();
 	const supabase = createClientComponentClient();
 
 	const form = useForm<z.infer<typeof FormSchema>>({
@@ -68,7 +66,7 @@ const GetUsername = ({
 
 	const onSubmit = async (data: z.infer<typeof FormSchema>) => {
 		try {
-			await submitUsername(data.username);
+			await submitUsername(data.username.toLowerCase());
 
 			toast({
 				title: "Username set",
