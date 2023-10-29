@@ -26,9 +26,14 @@ export async function middleware(req: NextRequest) {
 		return NextResponse.redirect(new URL("/login", req.url));
 	}
 
+	// if request is /r redirect to /app
+	if (req.nextUrl.pathname === "/app/r") {
+		return NextResponse.redirect(new URL("/app", req.url));
+	}
+
 	return res;
 }
 
 export const config = {
-	matcher: ["/app/:path*", "/login", "/"]
+	matcher: ["/app/:path*", "/login", "/", "/app/r"]
 };

@@ -71,6 +71,8 @@ const CreateRoom = () => {
 				title: "Room Created",
 				description: "You have successfully created a room."
 			});
+
+			router.push(`app/r/${room_id}`);
 		} catch (error) {
 			console.error(error);
 		}
