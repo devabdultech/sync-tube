@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/dialog";
 
 const FormSchema = z.object({
-	room: z.string().min(4, {
+	room: z.string().toLowerCase().min(4, {
 		message: "Room name must be at least 4 characters."
 	})
 });
@@ -45,7 +45,7 @@ const CreateRoom = () => {
 	const onSubmit = async (roomData: z.infer<typeof FormSchema>) => {
 		try {
 			const supabase = createClientComponentClient();
-			const room_id = uuidv4().replace(/-/g, "");
+			const room_id = uuidv4();
 			const user = (await supabase.auth.getUser()).data.user;
 			const { data: userData, error: userError } = await supabase
 				.from("Users")
