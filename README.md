@@ -16,9 +16,6 @@ SyncTube is a real-time synchronized video streaming and chat application that a
 - Next.js
 - Shadcn UI
 - Tailwind CSS
-- NextUI
-- WebRTC
-- Socket.io
 
 ## Getting Started
 
@@ -40,7 +37,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Usage
 
 1. Create a room or join an existing one.
-2. Share the room link with your friends.
+2. Share the room ID with your friends.
 3. Add a YouTube link to the room to start watching together.
 4. Use the chat to communicate with others in the room.
 

@@ -26,6 +26,15 @@ export async function middleware(req: NextRequest) {
 		return NextResponse.redirect(new URL("/login", req.url));
 	}
 
+	// if session is not signed in and the current path is /app/r/:id redirect the session to /login
+	if (!session && req.nextUrl.pathname.startsWith("/app/r/:id")) {
+		const code = req.nextUrl.searchParams.get("code");
+		if (code) {
+			return res;
+		}
+		return NextResponse.redirect(new URL("/login", req.url));
+	}
+
 	// if request is /r redirect to /app
 	if (req.nextUrl.pathname === "/app/r") {
 		return NextResponse.redirect(new URL("/app", req.url));

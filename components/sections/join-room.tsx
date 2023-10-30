@@ -30,7 +30,7 @@ import { PlusCircleIcon } from "lucide-react";
 
 const FormSchema = z.object({
 	roomId: z.string().uuid({
-		message: "Room URL must be at least 4 characters."
+		message: "Room ID must be a valid UUID"
 	})
 });
 
@@ -45,26 +45,67 @@ const JoinRoom = () => {
 		try {
 			const supabase = createClientComponentClient();
 
-			const { data, error } = await supabase
+			const { data, error: roomError } = await supabase
 				.from("Room")
 				.select("room_id")
 				.eq("room_id", roomData.roomId)
 				.single();
 
-			if (error) {
+			const user = (await supabase.auth.getUser()).data.user;
+			const { data: userData, error: userError } = await supabase
+				.from("Users")
+				.select("id, username")
+				.eq("id", user?.id)
+				.single();
+
+			if (roomError) {
 				toast({
 					title: "Room not found",
 					description: "The room you are trying to join does not exist."
 				});
 			}
 
-			if (data?.room_id === roomData.roomId) {
-				router.push(`/app/r/${roomData.roomId}`);
+			if (data && userData && data.room_id === roomData.roomId) {
+				// Fetch the current users array from the Room table
+				const { data: currentRoomData, error: roomError } = await supabase
+					.from("Room")
+					.select("users")
+					.eq("room_id", roomData.roomId)
+					.single();
+
+				if (roomError) {
+					console.error(roomError);
+					return;
+				}
+
+				// Get the existing users array or initialize it as an empty array
+				const currentUsers = currentRoomData?.users || [];
+
+				const newUser = {
+					userId: userData?.id,
+					username: userData?.username
+				};
+
+				// Append the new user to the existing users array
+				const updatedUsers = [...currentUsers, newUser];
+
+				// Update the 'users' column with the updated JSON data
+				const { error: updateError } = await supabase
+					.from("Room")
+					.update({ users: updatedUsers })
+					.eq("room_id", roomData.roomId);
+
+				if (updateError) {
+					console.error(updateError);
+				} else {
+					router.push(`/app/r/${roomData.roomId}`);
+				}
 			}
 		} catch (error) {
 			console.error(error);
 		}
 	};
+
 	return (
 		<Dialog>
 			<DialogTrigger className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
@@ -85,7 +126,7 @@ const JoinRoom = () => {
 								<FormItem>
 									<FormLabel>Room ID</FormLabel>
 									<FormControl>
-										<Input placeholder="https://sync-tube-one.vercel.app/r/our-room" {...field} />
+										<Input placeholder="607337e1-180a-4837-a11a-aa211a7a646e" {...field} />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
