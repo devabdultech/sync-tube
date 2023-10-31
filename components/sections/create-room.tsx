@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import * as z from "zod";
 
-import { PlusIcon } from "lucide-react";
+import { PlusIcon, Loader2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -108,7 +108,13 @@ const CreateRoom = () => {
 								</FormItem>
 							)}
 						/>
-						<Button type="submit">Create Room</Button>
+						<Button className="w-full" type="submit" disabled={form.formState.isSubmitting}>
+							{form.formState.isSubmitting ? (
+								<Loader2Icon className="mr-2 h-4 w-4 animate-spin" size="sm" />
+							) : (
+								"Create Room"
+							)}
+						</Button>
 					</form>
 				</Form>
 			</DialogContent>

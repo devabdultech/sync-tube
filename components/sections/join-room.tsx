@@ -6,6 +6,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+import { Loader2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -132,7 +133,13 @@ const JoinRoom = () => {
 								</FormItem>
 							)}
 						/>
-						<Button type="submit">Join Room</Button>
+						<Button className="w-full" type="submit" disabled={form.formState.isSubmitting}>
+							{form.formState.isSubmitting ? (
+								<Loader2Icon className="mr-2 h-4 w-4 animate-spin" size="sm" />
+							) : (
+								"Join Room"
+							)}
+						</Button>
 					</form>
 				</Form>
 			</DialogContent>
