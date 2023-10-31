@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body className={cn("min-h-[100dvh] bg-background text-primary", GeistSans.variable)}>
+			<body className={cn("min-h-[100dvh] bg-background text-primary", inter.className)}>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
 					{children}
 					<Footer />
