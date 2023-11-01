@@ -12,7 +12,7 @@ const RoomPage = ({ params }: { params: { slug: string } }) => {
 				<div className="w-[65%] border"></div>
 				<div className="flex flex-1 flex-col border">
 					<div></div>
-					<Textarea className="relative top-0" placeholder="Enter your message" />
+					<Textarea className="" placeholder="Enter your message" />
 				</div>
 			</div>
 		</div>
