@@ -26,8 +26,8 @@ export async function middleware(req: NextRequest) {
 		return NextResponse.redirect(new URL("/login", req.url));
 	}
 
-	// if session is not signed in and the current path is /dashboard/r/:id redirect the session to /login
-	if (!session && req.nextUrl.pathname.startsWith("/room/:id")) {
+	// if session is not signed in and the current path is /room/:id redirect the session to /login
+	if (!session && req.nextUrl.pathname === "/room/:id") {
 		const code = req.nextUrl.searchParams.get("code");
 		if (code) {
 			return res;
@@ -35,7 +35,7 @@ export async function middleware(req: NextRequest) {
 		return NextResponse.redirect(new URL("/login", req.url));
 	}
 
-	// if request is /r redirect to /dashboard
+	// if request is /room redirect to /dashboard
 	if (req.nextUrl.pathname === "/room") {
 		return NextResponse.redirect(new URL("/dashboard", req.url));
 	}
