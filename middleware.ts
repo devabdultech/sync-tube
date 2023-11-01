@@ -27,7 +27,7 @@ export async function middleware(req: NextRequest) {
 	}
 
 	// if session is not signed in and the current path is /room/:id redirect the session to /login
-	if (!session && req.nextUrl.pathname === "/room/:id") {
+	if (!session && req.nextUrl.pathname.startsWith("/room")) {
 		const code = req.nextUrl.searchParams.get("code");
 		if (code) {
 			return res;
@@ -44,5 +44,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-	matcher: ["/dashboard/:path*", "/login", "/", "/room/:path"]
+	matcher: ["/dashboard/:path*", "/login", "/", "/room/:path*"]
 };
