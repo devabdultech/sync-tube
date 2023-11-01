@@ -41,9 +41,15 @@ const Navbar = () => {
 				</SheetTrigger>
 				<SheetContent>
 					<div className="mt-8 flex flex-col gap-4">
-						<Link className="w-full" href="/login">
-							<Button>Login</Button>
-						</Link>
+						{session ? (
+							<Link className="w-full" href="/dashboard">
+								<Button className="w-full">Dashboard</Button>
+							</Link>
+						) : (
+							<Link className="w-full" href="/login">
+								<Button className="w-full">Login</Button>
+							</Link>
+						)}
 
 						<div className="flex w-full items-center justify-between">
 							<Button onClick={() => setTheme("light")}>Light</Button>
@@ -56,8 +62,8 @@ const Navbar = () => {
 
 			<div className="hidden items-center gap-3 lg:flex">
 				{session ? (
-					<Link href="/app">
-						<Button>App</Button>
+					<Link href="/dashboard">
+						<Button>Dashboard</Button>
 					</Link>
 				) : (
 					<Link href="/login">

@@ -31,7 +31,7 @@ const UserAuthForm = () => {
 		await supabase.auth.signInWithOtp({
 			email,
 			options: {
-				emailRedirectTo: `${location.origin}/app`
+				emailRedirectTo: `${location.origin}/dashboard`
 			}
 		});
 	};
@@ -44,7 +44,7 @@ const UserAuthForm = () => {
 					access_type: "offline",
 					prompt: "consent"
 				},
-				redirectTo: `${location.origin}/app`
+				redirectTo: `${location.origin}/dashboard`
 			}
 		});
 	};

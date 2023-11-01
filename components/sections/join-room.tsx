@@ -48,9 +48,17 @@ const JoinRoom = () => {
 
 			const { data, error: roomError } = await supabase
 				.from("Room")
-				.select("room_id")
+				.select("room_id, users")
 				.eq("room_id", roomData.roomId)
 				.single();
+
+			if (roomError) {
+				toast({
+					title: "Room not found",
+					description: "The room you are trying to join does not exist."
+				});
+				return;
+			}
 
 			const user = (await supabase.auth.getUser()).data.user;
 			const { data: userData, error: userError } = await supabase
@@ -59,49 +67,30 @@ const JoinRoom = () => {
 				.eq("id", user?.id)
 				.single();
 
-			if (roomError) {
-				toast({
-					title: "Room not found",
-					description: "The room you are trying to join does not exist."
-				});
+			if (userError) {
+				console.error(userError);
+				return;
 			}
 
-			if (data && userData && data.room_id === roomData.roomId) {
-				// Fetch the current users array from the Room table
-				const { data: currentRoomData, error: roomError } = await supabase
-					.from("Room")
-					.select("users")
-					.eq("room_id", roomData.roomId)
-					.single();
+			const users = data?.users || [];
+			const userExists = users.find((user: any) => user.id === userData?.id);
 
-				if (roomError) {
-					console.error(roomError);
-					return;
-				}
+			if (!userExists) {
+				const newUser = { id: user?.id, username: userData?.username };
+				const newUsers = [...users, newUser];
 
-				// Get the existing users array or initialize it as an empty array
-				const currentUsers = currentRoomData?.users || [];
-
-				const newUser = {
-					userId: userData?.id,
-					username: userData?.username
-				};
-
-				// Append the new user to the existing users array
-				const updatedUsers = [...currentUsers, newUser];
-
-				// Update the 'users' column with the updated JSON data
 				const { error: updateError } = await supabase
 					.from("Room")
-					.update({ users: updatedUsers })
+					.insert({ users: newUsers })
 					.eq("room_id", roomData.roomId);
 
 				if (updateError) {
 					console.error(updateError);
-				} else {
-					router.push(`/app/r/${roomData.roomId}`);
+					return;
 				}
 			}
+
+			router.push(`/room/${data?.room_id}`);
 		} catch (error) {
 			console.error(error);
 		}

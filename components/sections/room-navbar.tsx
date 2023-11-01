@@ -61,7 +61,7 @@ const RoomNavbar = () => {
 				</DropdownMenuTrigger>
 				<DropdownMenuContent>
 					<DropdownMenuLabel className="cursor-pointer">
-						<Link href="/app/profile">
+						<Link href="/dashboard/profile">
 							<p className="text-base">{username}</p>
 							<p className="mt-1 text-muted-foreground">{userData && userData.email}</p>
 						</Link>
