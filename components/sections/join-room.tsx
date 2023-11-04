@@ -60,37 +60,37 @@ const JoinRoom = () => {
 				return;
 			}
 
-			const user = (await supabase.auth.getUser()).data.user;
-			const { data: userData, error: userError } = await supabase
-				.from("Users")
-				.select("id, username")
-				.eq("id", user?.id)
-				.single();
-
-			if (userError) {
-				console.error(userError);
-				return;
-			}
-
-			const users = data?.users || [];
-			const userExists = users.find((user: any) => user.id === userData?.id);
-
-			if (!userExists) {
-				const newUser = { id: user?.id, username: userData?.username };
-				const newUsers = [...users, newUser];
-
-				const { error: updateError } = await supabase
-					.from("Room")
-					.insert({ users: newUsers })
-					.eq("room_id", roomData.roomId);
-
-				if (updateError) {
-					console.error(updateError);
-					return;
-				}
-			}
-
 			router.push(`/room/${data?.room_id}`);
+
+			// const user = (await supabase.auth.getUser()).data.user;
+			// const { data: userData, error: userError } = await supabase
+			// 	.from("Users")
+			// 	.select("id, username")
+			// 	.eq("id", user?.id)
+			// 	.single();
+
+			// if (userError) {
+			// 	console.error(userError);
+			// 	return;
+			// }
+
+			// const users = data?.users || [];
+			// const userExists = users.find((user: any) => user.id === userData?.id);
+
+			// if (!userExists) {
+			// 	const newUser = { id: user?.id, username: userData?.username };
+			// 	const newUsers = [...users, newUser];
+
+			// 	const { error: updateError } = await supabase
+			// 		.from("Room")
+			// 		.insert({ users: newUsers })
+			// 		.eq("room_id", roomData.roomId);
+
+			// 	if (updateError) {
+			// 		console.error(updateError);
+			// 		return;
+			// 	}
+			// }
 		} catch (error) {
 			console.error(error);
 		}
