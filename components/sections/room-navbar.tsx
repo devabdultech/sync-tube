@@ -68,7 +68,7 @@ const RoomNavbar = () => {
 					</DropdownMenuLabel>
 					<DropdownMenuSeparator />
 					<DropdownMenuItem className="cursor-pointer">
-						<Link className="flex cursor-pointer items-center gap-2" href="/app/profile">
+						<Link className="flex w-full cursor-pointer items-center gap-2" href="/app/profile">
 							<User2Icon /> Profile
 						</Link>
 					</DropdownMenuItem>

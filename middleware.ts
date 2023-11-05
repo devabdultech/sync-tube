@@ -40,6 +40,25 @@ export async function middleware(req: NextRequest) {
 		return NextResponse.redirect(new URL("/dashboard", req.url));
 	}
 
+	const roomPathMatch = req.nextUrl.pathname.match(/^\/room\/([^/]+)/);
+
+	// If the current request path is /room/:id
+	if (roomPathMatch) {
+		const roomId = roomPathMatch[1];
+
+		// Query Supabase Room table to check if the room with roomId exists
+		const { data: room } = await supabase
+			.from("Room")
+			.select("room_id")
+			.eq("room_id", roomId)
+			.single();
+
+		// If the room does not exist, return a JSON response with a 404 status code
+		if (!room) {
+			return NextResponse.redirect(new URL("/not-found", req.url));
+		}
+	}
+
 	return res;
 }
 
