@@ -7,19 +7,10 @@ import VideoCanvas from "@/components/sections/video-canvas";
 const RoomPage = ({ params }: { params: { slug: string } }) => {
 	return (
 		<div className="h-[100dvh]">
-			<div className="flex h-full w-full flex-col border lg:flex-row">
+			<div className="flex h-full w-full flex-col lg:flex-row">
 				<VideoCanvas />
-				<div className="flex h-[50%] w-full flex-1 flex-col border lg:h-full">
+				<div className="flex h-[50%] w-full flex-1 flex-col border-t lg:h-full lg:border-l lg:border-t-0">
 					<ScrollArea className="flex-grow overscroll-y-contain p-2">
-						<ChatMessage />
-						<ChatMessage />
-						<ChatMessage />
-						<ChatMessage />
-						<ChatMessage />
-						<ChatMessage />
-						<ChatMessage />
-						<ChatMessage />
-						<ChatMessage />
 						<ChatMessage />
 						<ChatMessage />
 					</ScrollArea>
