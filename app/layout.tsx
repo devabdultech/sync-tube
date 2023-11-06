@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { GeistSans } from "geist/font";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
