@@ -8,11 +8,19 @@ import CreateRoom from "@/components/sections/create-room";
 import JoinRoom from "@/components/sections/join-room";
 import Room from "@/components/sections/room";
 import GetUsername from "@/components/sections/get-username";
+import { extractDateFromTimestamp } from "@/lib/utils";
+
+interface Rooms {
+	room_id: string;
+	room_name: string;
+	created_at: string;
+}
 
 const App = () => {
 	const supabase = createClientComponentClient();
 	const [userData, setUserData] = useState<null | User>(null);
 	const [username, setUsername] = useState<string | null>(null);
+	const [rooms, setRooms] = useState<Rooms[]>([]);
 	const [openDialog, setOpenDialog] = useState(false);
 	const [loading, setLoading] = useState(true);
 
@@ -27,6 +35,11 @@ const App = () => {
 				.select("username, id")
 				.eq("email", user?.email);
 
+			const getRooms = await supabase
+				.from("Room")
+				.select("*")
+				.eq("creator_id", user?.id);
+
 			if (getUserData.data?.length === 0) {
 				setOpenDialog(true);
 			}
@@ -34,11 +47,13 @@ const App = () => {
 			const fetchedUsername = getUserData.data?.[0]?.username;
 			setUsername(fetchedUsername);
 			setUserData(user);
+			setRooms((getRooms.data as Rooms[]) || []);
+			console.log(rooms);
 			setLoading(false);
 		};
 
 		fetchUserData();
-	}, [supabase, supabase.auth]);
+	}, [supabase, supabase.auth, rooms]);
 
 	if (loading) {
 		return <Loading />;
@@ -56,7 +71,14 @@ const App = () => {
 
 			<div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
 				<CreateRoom />
-				<Room roomName="" createdAt="" />
+				{rooms.map((room) => (
+					<Room
+						key={room.room_id}
+						roomId={room.room_id}
+						roomName={room.room_name}
+						createdAt={extractDateFromTimestamp(room.created_at)}
+					/>
+				))}
 			</div>
 
 			<GetUsername
