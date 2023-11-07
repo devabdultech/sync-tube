@@ -48,7 +48,6 @@ const App = () => {
 			setUsername(fetchedUsername);
 			setUserData(user);
 			setRooms((getRooms.data as Rooms[]) || []);
-			console.log(rooms);
 			setLoading(false);
 		};
 
