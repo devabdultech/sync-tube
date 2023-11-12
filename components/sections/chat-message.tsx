@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const ChatMessage = ({username} : {username: string}) => {
+const ChatMessage = ({ username }: { username: string }) => {
 	return (
 		<div className="mb-3 flex gap-2">
 			<Avatar className="h-6 w-6">
